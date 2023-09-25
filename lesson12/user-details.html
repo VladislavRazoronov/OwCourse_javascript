@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User details</title>
+</head>
+<body>
+<p id="item"></p>
+<script>
+  let url = new URL(location.href);
+  let userID = url.searchParams.get("id");
+  fetch(`https://jsonplaceholder.typicode.com/users/${userID}`
+  ).then(response => response.json()
+  ).then((userData)=> {
+        let item = document.getElementById("item");
+      for (let prop in userData) {
+          if (Object.prototype.hasOwnProperty.call(userData, prop)) {
+              let property = document.createElement("p");
+              property.innerText = `${prop} - ${userData[prop]}`;
+              item.appendChild(property);
+          }
+      }
+      }
+  )
+</script>
+</body>
+</html>
